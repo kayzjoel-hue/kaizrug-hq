@@ -5,109 +5,58 @@
 **Role:** Product / Engineering — canonical execution candidate
 **Verification authority:** GitHub implementation + deployment/runtime evidence
 
+## P2 execution checkpoint — 2026-09-05
+
+P2 repository analysis has been executed against the current GitHub state.
+
+- Open pull requests across the accessible Kaizrug workspace: **0**.
+- Open issues in the P2 core set: **1**, created as the controlled P2.1 backend-runtime gate for `pipeline-pro`.
+- `rca-upgrade` PR #1 was closed without merge; no canonical RCA work was moved into the experimental repository.
+- `rca-sites` remains the canonical RCA public-web implementation.
+
 ## P2.1 result
 
 **FRONTEND RUNTIME: VERIFIED**
-**BACKEND RUNTIME: NOT VERIFIED**
+**BACKEND IMPLEMENTATION: VERIFIED**
+**BACKEND LIVE RUNTIME: NOT VERIFIED**
 **FRONTEND → API → DATA FLOW: NOT YET PROVEN**
 **AUTONOMOUS RUNTIME ELIGIBILITY: HOLD**
 
-## Three-layer zoom
+## Current GitHub evidence
 
-### Layer 1 — Scribe/archive evidence
+The `pipeline-pro` repository contains a production server contract in `package.json`: a server development entrypoint, a production `build` using esbuild, and a production `start` command. The repository also contains the Express/tRPC backend implementation and the `/api/health` route documented by the prior P2 inspection.
 
-`SCRIBE CHAT COLLECTION` contains a July 2026 read-only Pipeline Pro deployment report. It records that Railway MySQL was provisioned and that the intended architecture was:
+The deployment layer remains incomplete in GitHub evidence. A targeted search found no committed Railway manifest/configuration such as `railway.json`, `railway.toml`, Dockerfile or Procfile. `.env.example` still contains a placeholder Railway URL and documents `EXPO_PUBLIC_API_BASE_URL` with `/api/trpc` included. Because the frontend tRPC client also appends `/api/trpc`, the production environment value must be inspected before connectivity can be certified.
 
-`Vercel frontend → Railway Express/tRPC backend → Railway MySQL`
+The repository's own status file continues to mark Railway deployment, backend health verification, CORS/API flow and backend data synchronization as open. The app remains local-first for job data and is not release-complete.
 
-The same report explicitly states that backend deployment finalization, `process.env.PORT`, frontend API configuration, and final runtime verification were still open. This is historical execution context, **not current runtime truth**.
+## Controlled P2.1 gate created
 
-### Layer 2 — Current Notion control/mapping
+GitHub issue `pipeline-pro#1` — **P2.1 — Recover and verify live backend runtime** — is now the execution gate for the remaining runtime work.
 
-The current P2 mapping correctly treats `pipeline-pro` as the canonical execution candidate but keeps backend/runtime evidence open. The current gate remains evidence-based: declared ≠ implemented ≠ deployed ≠ runtime-observed ≠ data-proven.
+Acceptance criteria:
 
-### Layer 3 — Current GitHub implementation
+1. Recover/identify the actual backend deployment authority.
+2. Recover the live backend public URL.
+3. Verify the production backend start contract.
+4. GET `/api/health` successfully.
+5. Verify the exact Vercel `EXPO_PUBLIC_API_BASE_URL` and resolve any `/api/trpc` duplication.
+6. Execute a non-destructive frontend → tRPC request.
+7. Execute a controlled server-backed read/write/read cycle against the intended MySQL data layer.
+8. Capture timestamped evidence.
 
-The repository contains a real backend implementation, not merely a frontend shell:
+## Recovery boundary
 
-- Express server entrypoint: `server/_core/index.ts`
-- `/api/health` endpoint
-- tRPC gateway at `/api/trpc`
-- routers for pipelines, followups, activity, settings and auth
-- Drizzle/MySQL dependency and database layer
-- production build/start scripts
-- frontend tRPC client using `EXPO_PUBLIC_API_BASE_URL`
+Do not rebuild Pipeline Pro. If deployment configuration exists only on the desktop, recover the non-secret deployment files/configuration and compare them against GitHub `main`.
 
-## Current evidence
-
-### Frontend
-
-- Vercel project: `pipeline-pro`.
-- Latest observed deployment: `dpl_8PoqRrSvD1oTAtU4mrvB1PLKXkEP`.
-- Deployment state: `READY`.
-- Linked GitHub commit: `1aa3c7ea8f30ba56a4e1dd44b71d9698ed19c80b`.
-- Production URL returned HTTP 200.
-- No Vercel runtime error clusters were found in the inspected 7-day period.
-
-### Backend code
-
-The backend is present and has the required route contract, but **no current live backend URL was established from the connected evidence**.
-
-The repository's `.env.example` still uses a placeholder Railway URL and the deployment checklist/todo still mark Railway deployment and API verification as open.
-
-### Deployment configuration gap
-
-A targeted repository search did **not** find a Railway-specific deployment manifest/configuration such as `railway.json`, `railway.toml`, or a committed Dockerfile/Procfile. This does not prove the desktop project lacks such files; it proves only that they are not present in the current GitHub `main` evidence inspected here.
-
-### Frontend/API contract warning
-
-The repository's `.env.example` documents `EXPO_PUBLIC_API_BASE_URL` with `/api/trpc` included, while `lib/trpc.ts` constructs the request as `${getApiBaseUrl()}/api/trpc`. If the environment is populated exactly as documented, this can produce a duplicated `/api/trpc/api/trpc` path. The production value must therefore be inspected before claiming frontend → API connectivity.
-
-## Data-flow architecture
-
-Intended path:
-
-`Expo Web → Vercel frontend → Railway Express backend → /api/trpc → Drizzle/MySQL`
-
-The code supports this path, but the live chain is not proven end-to-end.
-
-## P2.1 acceptance gates
-
-1. Recover/identify the actual Railway backend service or confirm an alternative live backend authority.
-2. Recover the actual backend public URL.
-3. Verify the backend starts with the repository production build/start contract.
-4. Verify `GET /api/health` against the live backend.
-5. Verify the exact Vercel `EXPO_PUBLIC_API_BASE_URL` value and resolve the `/api/trpc` path contract.
-6. Verify a non-destructive frontend → tRPC request.
-7. Verify one controlled server-backed data read/write/read cycle against the intended MySQL data layer.
-8. Capture timestamped evidence for each boundary.
-
-## Desktop recovery instruction
-
-Because the operator confirms the project has been executed from the desktop, **do not rebuild Pipeline Pro from scratch**.
-
-Before changing code, recover the desktop project's deployment layer and compare it against GitHub `main`.
-
-### Next move if the desktop project contains them
-
-Provide/copy the following **non-secret** files or their relevant contents for inspection:
-
-- `railway.json` / `railway.toml`
-- `Dockerfile`
-- `Procfile`
-- `docker-compose.yml` if used for deployment
-- `.env.example` or a redacted environment map
-- Vercel project configuration if present
-- any desktop deployment notes containing the Railway service URL
-
-**Never send database passwords, API secrets, OAuth client secrets, or private tokens.**
-
-If those files exist on the desktop, the current diagnosis is likely a **recovery/configuration mismatch**, not a missing application codebase.
+Never commit or disclose database passwords, API keys, OAuth client secrets or private tokens.
 
 ## Boundary decision
 
-Historical Scribe evidence helps recover intent and previous execution, but it cannot close runtime truth. GitHub proves the backend code exists. Vercel proves the frontend is serving. Neither proves the live Railway service, API request path, or database persistence.
+**P2 mapping: READY.**
+**P2.1 runtime verification: OPEN / EVIDENCE-GATED.**
+**Autonomous runtime linkage: HOLD.**
 
-**P2.1 remains OPEN / EVIDENCE-GATED.**
+GitHub proves the implementation and execution contract. Vercel proves frontend serving. Neither, by itself, proves the live backend service, API path, MySQL persistence, customer usage or revenue.
 
-No autonomous agent/runtime linkage is authorized from this verification alone.
+The next execution is the controlled P2.1 backend recovery/verification gate, not broad autonomous wiring.
