@@ -1,6 +1,6 @@
 # KAIZRUG HQ — GitHub Project Registry
 
-Version: 1.0
+Version: 1.1
 Date: 2026-09-05
 Authority: Notion `KAIZRUG HQ — MASTER INDEX`
 Purpose: turn the GitHub repository list into a project execution map.
@@ -30,16 +30,16 @@ Notion owns project intent, status, next action and governance. GitHub owns impl
 | `kaizrug-site` | CANONICAL CANDIDATE | Active | Verify current public deployment and make this the canonical brand site if confirmed |
 | `kaizrug-cv` | CANONICAL CV | Active / public | Keep CV source synchronized with live CV proof |
 | `joel-kaizire-cv` | DUPLICATE / EMPTY | No implementation | Do not build separately; archive/redirect after canonical CV confirmation |
-| `portflio-edition` | SUPPORTING / VARIANT | Existing code | Compare against `kaizrug-site`; merge useful work or retain as variant |
-| `kaizrug-app` | EXPERIMENT / APP SHELL | Existing code | Define exact product purpose before further commits |
+| `portflio-edition` | SUPPORTING / BRAND VARIANT | Existing code | No new feature work; use only as reference/source for useful portfolio content until `kaizrug-site` is verified |
+| `kaizrug-app` | EXPERIMENT / APP SHELL | Existing minimal Express shell | Define application contract before any autonomous/runtime binding |
 
 ## 02 — CLARITY COMMAND / PRODUCTS
 
 | Repository | Classification | Execution state | Next action |
 |---|---|---|---|
-| `pipeline-pro` | PRODUCT / ENGINEERING | Technically active | Verify current deployment, define canonical product identity and next customer-facing milestone |
-| `booking-system` | CANONICAL PRODUCT CANDIDATE | Production deployment exists; commercial proof insufficient | Run end-to-end runtime verification, then customer/payment test and evidence capture |
-| `template-page` | SUPPORTING / PRODUCTIZATION | Small implementation | Decide whether it is the Clarity Command storefront/showroom; commit useful product surface or archive |
+| `pipeline-pro` | PRODUCT / ENGINEERING — CANONICAL EXECUTION CANDIDATE | Technically active | Verify current deployment/runtime and define customer-facing milestone |
+| `booking-system` | CANONICAL PRODUCT CANDIDATE | Production infrastructure verified; commercial proof insufficient | Run end-to-end booking/payment/customer verification and evidence capture |
+| `template-page` | SUPPORTING / PRODUCTIZATION VARIANT | Small implementation | Do not promote to Clarity Command canonical; retain as productization surface unless explicitly reassigned |
 
 ### Missing from GitHub: Clarity Command
 
@@ -83,9 +83,9 @@ These are real Notion/business assets, but they are not automatically GitHub pro
 
 | Repository | Classification | Execution state | Next action |
 |---|---|---|---|
-| `house-of-maria` | CLIENT / PRODUCT SITE | Existing code | Verify owner/client scope, deployment and next commercial action |
-| `azizfitness` | CLIENT / EXPERIMENT | Existing code | Confirm whether still active; otherwise archive |
-| `sandra-sis` | CLIENT / FAMILY PROJECT | Existing code | Confirm purpose and deployment; keep isolated from core Kaizrug product stack |
+| `house-of-maria` | CLIENT / PRODUCT SITE | Existing complete static storefront | Verify live deployment and commercial owner/state; no autonomous core binding |
+| `azizfitness` | CLIENT / EXPERIMENT — ACTIVE IMPLEMENTATION | Astro migration complete in repo; deployment-ready history | Verify current runtime/client state before further work or archive |
+| `sandra-sis` | CLIENT / FAMILY PROJECT | Existing static chef portfolio | Keep isolated from core Kaizrug product/runtime; verify current use if needed |
 
 ## 05 — HOSPITALITY / LEARNING LAB
 
@@ -103,7 +103,7 @@ These are the important omissions discovered during the Notion cross-check.
 | Hospitality Pro Hub | Active Dubai hub + leadership portfolio | No dedicated canonical repo identified | Decide whether it remains Notion-first or becomes a deployable product |
 | FUMING VALUABLES OS | Product structure: Vault Install / Data Cleanup / Vault Backup | No dedicated repo identified | Create repo only when implementation begins |
 | Dubai Supply Signal Monitor / Scarcity Index | UAE–Africa intelligence concept and signal model | No dedicated repo identified | **LAB → define MVP → commit → deploy prototype** |
-| Revenue App Architect / App Agent | App/product architecture work | No unambiguous dedicated repo | Bind to `kaizrug-app` only after role is defined |
+| Revenue App Architect / App Agent | App/product architecture work | `kaizrug-app` is now mapped as an app shell, but not yet an autonomous runtime | Define contract and bind only after architecture is explicit |
 | Invisible Hand Protocol | Draft protocol in Notion | No dedicated implementation repo | Keep as doctrine/content until software implementation is justified |
 | RCA eBook system | eBook Hub + inventory + production pipeline | No dedicated software repo identified | Treat as content/product pipeline, not software by default |
 | Career Engine / Career Positioning templates | Template Studio / bundle work | No unambiguous canonical repo | Productize in the template layer first; software only if required |
@@ -113,9 +113,32 @@ These are the important omissions discovered during the Notion cross-check.
 
 | Repository | Classification | Execution state | Next action |
 |---|---|---|---|
-| `turbo-broccoli` | UNCLASSIFIED / LIKELY EXPERIMENT | Small implementation | Inspect once; classify or archive |
+| `turbo-broccoli` | PRODUCTIZATION / TEMPLATE-STOREFRONT VARIANT | Static Template Zone implementation; overlaps `template-page` | No autonomous binding; retain as reference until one template storefront is chosen, then archive/merge if superseded |
 | `Formspree` | EMPTY / INTEGRATION PLACEHOLDER | No implementation | Archive unless a concrete integration requires it |
 | `kaizrug-capsule` | LEGACY / INFRASTRUCTURE | Private, small | Retain as historical infrastructure; do not treat as primary HQ |
+
+## P2 — SYSTEM ANALYSIS RECOVERY / MAPPING READINESS
+
+The eight-repository inspection set was executed on 2026-09-05 and recorded in `P2-SYSTEM-ANALYSIS-RECOVERY.md`.
+
+**Result:** repository roles are now bounded enough to prevent accidental autonomous/runtime linkage to ambiguous structures.
+
+| Layer | Recovered state |
+|---|---|
+| Core execution | `pipeline-pro` mapped as Product / Engineering — canonical execution candidate |
+| Future application runtime | `kaizrug-app` mapped as minimal Express app shell; contract still required |
+| Productization | `template-page` + `turbo-broccoli` mapped as overlapping template/storefront variants |
+| Brand | `portflio-edition` mapped as supporting brand variant |
+| Client/product sites | `house-of-maria` and `azizfitness` mapped and isolated |
+| Family/client portfolio | `sandra-sis` mapped and isolated |
+
+### Autonomous-link boundary
+
+**MAPPING READY ≠ RUNTIME READY.**
+
+Before any autonomous structure is linked, the target must have a canonical identity, documented function/boundary, known deployment authority, verified runtime where applicable, defined data dependencies, and human approval for the first autonomous action.
+
+**P2 decision: HOLD autonomous runtime linking until the specific target passes its own evidence gate.**
 
 ## Execution status vocabulary
 
@@ -131,18 +154,20 @@ These are the important omissions discovered during the Notion cross-check.
 
 ## First execution queue
 
-1. **P0 — Establish the canonical project registry in Notion and bind every repo to one project.**
-2. **P0 — Resolve RCA repository duplication before any new RCA repository is created.**
-3. **P0 — Resolve Clarity Command canonical repo; this is the clearest missing software/product bridge.**
-4. **P1 — Verify `booking-system` end-to-end runtime and payment flow; capture proof.**
-5. **P1 — Verify `rca-sites` against the live RCA runtime and declare the canonical source.**
-6. **P1 — Verify `kaizrug-site` and `kaizrug-cv` against current public deployments.**
-7. **P1 — Commit or explicitly archive `hotel-task-cli`; remove the phantom-project state.**
-8. **P2 — Classify `turbo-broccoli`, `kaizrug-app`, `portflio-edition`, `house-of-maria`, `azizfitness`, and `sandra-sis` by actual runtime/use.**
-9. **P2 — Create GitHub repos for Notion projects only when they cross the implementation threshold.**
+1. **P0 — RESOLVED:** canonical project registry established in GitHub + Notion.
+2. **P0 — RESOLVED:** RCA canonicality decision executed for `rca-sites` / `rca-main`.
+3. **P0 — OPEN:** establish canonical Clarity Command repository; do not repurpose unrelated template repositories without explicit decision.
+4. **P1 — BOOKING INFRA CLOSED:** `booking-system` Supabase/database infrastructure gate closed; customer/payment/revenue proof remains open.
+5. **P1 — OPEN:** verify `rca-sites` against live RCA runtime.
+6. **P1 — OPEN:** verify `kaizrug-site` and `kaizrug-cv` against current public deployments.
+7. **P1 — OPEN:** commit or explicitly archive `hotel-task-cli`.
+8. **P2 — EXECUTED:** classify `kaizrug-app`, `pipeline-pro`, `template-page`, `portflio-edition`, `house-of-maria`, `azizfitness`, `sandra-sis`, and `turbo-broccoli` by actual repository evidence.
+9. **P2 — ACTIVE NEXT:** promote only evidence-backed canonical targets into runtime verification; autonomous linking remains gated.
 
 ## Non-negotiable rule
 
 **No new repository for an existing function until the canonical repository is known.**
+
+**No autonomous runtime linkage from design declaration alone.**
 
 The GitHub workspace should become smaller in ambiguity even if the repository count remains unchanged.
