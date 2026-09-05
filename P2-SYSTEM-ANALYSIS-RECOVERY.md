@@ -16,7 +16,7 @@ P2 is therefore an evidence-recovery phase, not an autonomous deployment phase.
 | Repository | Evidence observed | P2 classification | Readiness |
 |---|---|---|---|
 | `kaizrug-app` | Minimal Express app: `index.js`, `package.json`, Express dependency; root route returns a live message; no product-specific runtime contract found | **EXPERIMENT / APP SHELL** | MAPPED — role definition required before autonomous wiring |
-| `pipeline-pro` | Substantial application structure (`app`, `components`, config) plus deployment/checklist guides and historical Vercel stabilization commits | **PRODUCT / ENGINEERING — CANONICAL EXECUTION CANDIDATE** | MAPPED — deployment/runtime/customer proof remains separate |
+| `pipeline-pro` | Substantial Expo/React Native + Express/tRPC structure, deployment/checklist guides and historical Vercel stabilization commits | **PRODUCT / ENGINEERING — CANONICAL EXECUTION CANDIDATE** | RUNTIME PARTIAL — frontend verified; backend/API path remains unverified |
 | `template-page` | Single `index.html`, small static implementation | **SUPPORTING / PRODUCTIZATION VARIANT** | MAPPED — not sufficient evidence to make it Clarity Command canonical |
 | `portflio-edition` | Large static personal portfolio page, CV PDF and image assets; commit history includes Cloudflare deployment and later content/contact updates | **SUPPORTING / BRAND VARIANT** | MAPPED — do not treat as canonical while `kaizrug-site` remains candidate |
 | `house-of-maria` | Complete static storefront with `index.html`, `script.js`, `style.css`, product data/assets; README explicitly documents WhatsApp ordering and pre-live placeholders | **CLIENT / PRODUCT SITE** | MAPPED — commercial/runtime activation is separate |
@@ -37,17 +37,27 @@ The inspected repositories no longer need to be treated as an undifferentiated p
 - **Client/product sites:** `house-of-maria`, `azizfitness`
 - **Family/client portfolio:** `sandra-sis`
 
-### 2. No repository is promoted to autonomous authority by inspection alone
+### 2. Runtime verification of the canonical execution candidate has started
 
-Inspection establishes role and mapping readiness. It does **not** establish production authority, current runtime health, customer usage, payment success, or revenue.
+`pipeline-pro` is deployed on Vercel and the production frontend currently returns HTTP 200. The observed Vercel deployment is `READY` and is linked to GitHub commit `1aa3c7ea8f30ba56a4e1dd44b71d9698ed19c80b` on `main`. Vercel reported no runtime error clusters for the inspected 7-day period.
 
-### 3. Clarity Command remains unassigned at the engineering layer
+This verifies the **frontend delivery surface**, not the complete application runtime. The repository's own checklist still marks Railway backend deployment, `/api/health`, CORS, and frontend-to-backend communication as unfinished gates. The backend health endpoint exists in `server/_core/index.ts`, but no live backend endpoint was established by the available Vercel evidence.
 
-`template-page` and `turbo-broccoli` are productization/template surfaces, but neither is sufficient evidence for a canonical Clarity Command repository. The prior P0 decision remains valid: do not silently repurpose either repository.
+### 3. Missing rich runtime layer identified
 
-### 4. `kaizrug-app` is not yet the autonomous runtime
+The intended execution path is:
 
-The repository is a minimal Express shell. It can become the binding point for Revenue App Architect / App Agent work only after the application contract and system boundary are explicitly defined.
+`Expo Web → Vercel frontend → Railway backend → tRPC/API → data layer`
+
+The principal missing runtime evidence is the backend deployment and its connection to the deployed frontend. Follow-up persistence, server-backed job CRUD, and reminder execution are also still listed as implementation gaps in the repository status.
+
+### 4. Autonomous runtime is still not present
+
+Vercel Agent Runs discovery returned no production projects with agent activity in the inspected 7-day period. Therefore no autonomous runtime should be inferred from the application's existing architecture.
+
+### 5. No repository is promoted to autonomous authority by inspection alone
+
+Inspection establishes role and mapping readiness. Runtime verification establishes only the specific surfaces actually observed. It does **not** establish customer usage, payment success, or revenue.
 
 ## Autonomous-link gate
 
@@ -68,6 +78,8 @@ Before any runtime autonomous structure is linked, the target must have:
 
 **SYSTEM ANALYSIS RECOVERY: COMPLETE FOR THE EIGHT-REPOSITORY INSPECTION SET.**  
 **MAPPING READINESS: READY.**  
+**PIPELINE-PRO FRONTEND RUNTIME: VERIFIED.**  
+**PIPELINE-PRO BACKEND RUNTIME: NOT YET VERIFIED.**  
 **AUTONOMOUS RUNTIME LINK: NOT YET AUTHORIZED.**
 
-The next execution is not “connect everything.” It is to take each mapped canonical/active target through its own runtime verification gate, then promote only evidence-backed structures.
+The next execution is **P2.1 — backend/runtime verification**, not broad autonomous wiring.
